@@ -15,15 +15,16 @@ import {
 
 const mindarThree = new MindARThree({
 
-    // Dedicated AR container
     container:
         document.getElementById(
             'ar-container'
         ),
 
-    // Your compiled MindAR target file
     imageTargetSrc:
         './targets/targets.mind',
+
+    // Disable MindAR's built-in scanning UI
+    uiScanning: 'no',
 
     // Tracking smoothing
     filterMinCF: 0.0001,
