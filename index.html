@@ -1,37 +1,141 @@
-<!-- ================================= -->
-<!-- SCANNING UI                       -->
-<!-- ================================= -->
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="scan-ui">
+<head>
 
-    <div class="scan-title">
-        Scan the image
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My First WebAR</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ================================= -->
+    <!-- AR CONTAINER                      -->
+    <!-- ================================= -->
+
+    <div id="ar-container"></div>
+
+
+    <!-- ================================= -->
+    <!-- START SCREEN                      -->
+    <!-- ================================= -->
+
+    <div id="start-screen">
+
+        <h1>
+            My First WebAR
+        </h1>
+
+        <p>
+            Point your camera at the AR image
+        </p>
+
+        <button id="start-button">
+            START AR
+        </button>
+
     </div>
 
 
-    <div class="scan-box">
+    <!-- ================================= -->
+    <!-- SCANNING UI                       -->
+    <!-- ================================= -->
 
-        <!-- TOP LEFT -->
-        <div class="scan-corner top-left"></div>
+    <div id="scan-ui">
 
-        <!-- TOP RIGHT -->
-        <div class="scan-corner top-right"></div>
-
-        <!-- BOTTOM LEFT -->
-        <div class="scan-corner bottom-left"></div>
-
-        <!-- BOTTOM RIGHT -->
-        <div class="scan-corner bottom-right"></div>
+        <div class="scan-title">
+            Scan the image
+        </div>
 
 
-        <!-- MOVING SCAN LINE -->
-        <div class="scan-line"></div>
+        <div class="scan-box">
+
+            <!-- TOP LEFT -->
+            <div
+                class="scan-corner top-left">
+            </div>
+
+
+            <!-- TOP RIGHT -->
+            <div
+                class="scan-corner top-right">
+            </div>
+
+
+            <!-- BOTTOM LEFT -->
+            <div
+                class="scan-corner bottom-left">
+            </div>
+
+
+            <!-- BOTTOM RIGHT -->
+            <div
+                class="scan-corner bottom-right">
+            </div>
+
+
+            <!-- MOVING SCAN LINE -->
+            <div class="scan-line">
+            </div>
+
+        </div>
+
+
+        <div class="scan-description">
+            Move your camera slowly over the target
+        </div>
 
     </div>
 
 
-    <div class="scan-description">
-        Move your camera slowly over the target
-    </div>
+    <!-- ================================= -->
+    <!-- IMPORT MAP                        -->
+    <!-- ================================= -->
 
-</div>
+    <script type="importmap">
+
+    {
+        "imports": {
+
+            "three":
+            "https://cdn.jsdelivr.net/npm/three@0.151.0/build/three.module.js",
+
+            "three/addons/":
+            "https://cdn.jsdelivr.net/npm/three@0.151.0/examples/jsm/",
+
+            "mindar-image-three":
+            "https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-three.prod.js"
+
+        }
+    }
+
+    </script>
+
+
+    <!-- ================================= -->
+    <!-- JAVASCRIPT                        -->
+    <!-- ================================= -->
+
+    <script
+        type="module"
+        src="script.js">
+    </script>
+
+
+</body>
+
+</html>
