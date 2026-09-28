@@ -1,69 +1,10 @@
 /* ==================================================
-   AR CAMERA CONTAINER
-   ================================================== */
-
-#ar-container {
-
-    position: fixed;
-
-    top: 0;
-    left: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-
-    z-index: 0;
-
-    background: black;
-
-}
-
-
-/* ==================================================
-   MINDAR CAMERA VIDEO
-   ================================================== */
-
-#ar-container video {
-
-    position: absolute !important;
-
-    top: 0 !important;
-    left: 0 !important;
-
-    width: 100% !important;
-    height: 100% !important;
-
-    object-fit: cover !important;
-
-}
-
-
-/* ==================================================
-   THREE.JS CANVAS
-   ================================================== */
-
-#ar-container canvas {
-
-    position: absolute !important;
-
-    top: 0 !important;
-    left: 0 !important;
-
-    width: 100% !important;
-    height: 100% !important;
-
-}
-
-/* ==================================================
    GLOBAL
    ================================================== */
 
 * {
     box-sizing: border-box;
 }
-
 
 html,
 body {
@@ -83,6 +24,8 @@ body {
     background: #111;
 
     color: white;
+
+    -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -94,9 +37,66 @@ body {
     position: relative;
 
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 
-    background: #111;
+    min-height: 100vh;
+
+    overflow: hidden;
+}
+
+
+/* ==================================================
+   AR CAMERA CONTAINER
+   ================================================== */
+
+#ar-container {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    overflow: hidden;
+
+    z-index: 0;
+
+    background: black;
+}
+
+
+/* ==================================================
+   MINDAR CAMERA VIDEO
+   ================================================== */
+
+#ar-container video {
+
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+}
+
+
+/* ==================================================
+   THREE.JS CANVAS
+   ================================================== */
+
+#ar-container canvas {
+
+    position: absolute !important;
+
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    pointer-events: none;
 }
 
 
@@ -108,11 +108,12 @@ body {
 
     position: fixed;
 
-    top: 0;
-    left: 0;
+    inset: 0;
 
     width: 100%;
-    height: 100%;
+    height: 100dvh;
+
+    min-height: 100vh;
 
     display: flex;
 
@@ -123,16 +124,18 @@ body {
     align-items: center;
 
     padding:
-        30px
-        25px;
+        max(24px, env(safe-area-inset-top))
+        24px
+        max(24px, env(safe-area-inset-bottom))
+        24px;
 
     text-align: center;
 
     background:
         radial-gradient(
             circle at center,
-            #222 0%,
-            #111 70%
+            #252525 0%,
+            #111 72%
         );
 
     z-index: 1000;
@@ -141,65 +144,80 @@ body {
 
 
 /* ==================================================
-   START SCREEN TITLE
+   START TITLE
    ================================================== */
 
 #start-screen h1 {
 
-    margin: 0 0 12px 0;
+    margin: 0;
 
-    font-size: clamp(
-        30px,
-        8vw,
-        48px
-    );
+    max-width: 90vw;
+
+    font-size:
+        clamp(
+            30px,
+            8vw,
+            48px
+        );
 
     font-weight: 700;
 
-    letter-spacing: -0.5px;
-
     line-height: 1.1;
 
+    letter-spacing: -0.5px;
 }
 
 
 /* ==================================================
-   START SCREEN DESCRIPTION
+   START DESCRIPTION
    ================================================== */
 
 #start-screen p {
 
+    width: 100%;
+
     max-width: 320px;
 
-    margin: 0 0 32px 0;
+    margin:
+        14px
+        0
+        30px;
 
-    color: rgba(
-        255,
-        255,
-        255,
-        0.72
-    );
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.72
+        );
 
-    font-size: 16px;
+    font-size:
+        clamp(
+            14px,
+            4vw,
+            16px
+        );
 
     line-height: 1.5;
-
 }
 
 
 /* ==================================================
-   START AR BUTTON
+   START BUTTON
    ================================================== */
 
 #start-button {
 
-    min-width: 190px;
+    width: min(
+        82vw,
+        280px
+    );
 
     min-height: 54px;
 
     padding:
         15px
-        28px;
+        24px;
 
     border: none;
 
@@ -231,32 +249,12 @@ body {
         box-shadow 0.2s ease,
         opacity 0.2s ease;
 
+    touch-action: manipulation;
 }
 
 
 /* ==================================================
-   START BUTTON HOVER
-   ================================================== */
-
-#start-button:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 12px 30px
-        rgba(
-            0,
-            0,
-            0,
-            0.45
-        );
-
-}
-
-
-/* ==================================================
-   START BUTTON ACTIVE
+   BUTTON PRESS
    ================================================== */
 
 #start-button:active {
@@ -268,7 +266,7 @@ body {
 
 
 /* ==================================================
-   START BUTTON DISABLED
+   BUTTON DISABLED
    ================================================== */
 
 #start-button:disabled {
@@ -278,32 +276,6 @@ body {
     opacity: 0.65;
 
     transform: none;
-
-}
-
-
-/* ==================================================
-   OLD MODEL CONTAINER
-   ================================================== */
-
-/*
-   MindAR now uses the entire body
-   as its AR container.
-
-   We keep this class in case you
-   use it again later.
-*/
-
-#model-container {
-
-    position: relative;
-
-    width: 100%;
-
-    height: 100%;
-
-    overflow: hidden;
-
 }
 
 
@@ -315,11 +287,12 @@ body {
 
     position: fixed;
 
-    top: 0;
-    left: 0;
+    inset: 0;
 
     width: 100%;
-    height: 100%;
+    height: 100dvh;
+
+    min-height: 100vh;
 
     display: none;
 
@@ -330,7 +303,15 @@ body {
     align-items: center;
 
     padding:
-        30px
+        calc(
+            20px +
+            env(safe-area-inset-top)
+        )
+        20px
+        calc(
+            20px +
+            env(safe-area-inset-bottom)
+        )
         20px;
 
     text-align: center;
@@ -339,12 +320,7 @@ body {
 
     z-index: 500;
 
-    /*
-       Don't block camera interaction.
-    */
-
     pointer-events: none;
-
 }
 
 
@@ -354,9 +330,14 @@ body {
 
 .scan-title {
 
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 
-    font-size: 24px;
+    font-size:
+        clamp(
+            20px,
+            5.5vw,
+            26px
+        );
 
     font-weight: 700;
 
@@ -370,7 +351,6 @@ body {
             0,
             0.85
         );
-
 }
 
 
@@ -382,15 +362,21 @@ body {
 
     position: relative;
 
-    width: min(
-        72vw,
-        280px
-    );
+    width:
+        min(
+            70vw,
+            280px
+        );
 
-    height: min(
-        72vw,
-        280px
-    );
+    aspect-ratio: 1 / 1;
+
+    border: 1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
 
     border-radius: 20px;
 
@@ -408,9 +394,9 @@ body {
 
     position: absolute;
 
-    width: 45px;
+    width: 42px;
 
-    height: 45px;
+    height: 42px;
 
     border-color: white;
 
@@ -423,21 +409,20 @@ body {
                 0,
                 0,
                 0,
-                0.7
+                0.75
             )
         );
-
 }
 
 
 /* ==================================================
-   TOP LEFT CORNER
+   TOP LEFT
    ================================================== */
 
 .scan-box::before {
 
-    top: 0;
-    left: 0;
+    top: -1px;
+    left: -1px;
 
     border-width:
         4px
@@ -450,18 +435,17 @@ body {
         0
         0
         0;
-
 }
 
 
 /* ==================================================
-   TOP RIGHT + BOTTOM RIGHT
+   TOP RIGHT
    ================================================== */
 
 .scan-box::after {
 
-    top: 0;
-    right: 0;
+    top: -1px;
+    right: -1px;
 
     border-width:
         4px
@@ -474,25 +458,6 @@ body {
         12px
         0
         0;
-
-}
-
-
-/* ==================================================
-   EXTRA CORNERS
-   ================================================== */
-
-.scan-box {
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.18
-        );
-
 }
 
 
@@ -502,11 +467,18 @@ body {
 
 .scan-description {
 
-    max-width: 300px;
+    width: 100%;
 
-    margin-top: 24px;
+    max-width: 290px;
 
-    font-size: 15px;
+    margin-top: 20px;
+
+    font-size:
+        clamp(
+            13px,
+            3.8vw,
+            15px
+        );
 
     line-height: 1.5;
 
@@ -515,7 +487,7 @@ body {
             255,
             255,
             255,
-            0.9
+            0.92
         );
 
     text-shadow:
@@ -526,67 +498,6 @@ body {
             0,
             0.85
         );
-
-}
-
-
-/* ==================================================
-   MOBILE OPTIMIZATION
-   ================================================== */
-
-@media (
-    max-width: 600px
-) {
-
-    #start-screen {
-
-        padding:
-            25px
-            20px;
-
-    }
-
-
-    #start-screen h1 {
-
-        font-size: 32px;
-
-    }
-
-
-    #start-screen p {
-
-        font-size: 15px;
-
-        margin-bottom: 28px;
-
-    }
-
-
-    #start-button {
-
-        width: 80%;
-
-        max-width: 280px;
-
-    }
-
-
-    .scan-title {
-
-        font-size: 21px;
-
-    }
-
-
-    .scan-description {
-
-        font-size: 14px;
-
-        max-width: 270px;
-
-    }
-
 }
 
 
@@ -594,37 +505,181 @@ body {
    SMALL PHONES
    ================================================== */
 
-@media (
-    max-height: 650px
-) {
+@media (max-width: 380px) {
+
+    #start-screen {
+
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    #start-screen h1 {
+
+        font-size: 30px;
+    }
+
+    #start-screen p {
+
+        margin-bottom: 24px;
+    }
+
+    #start-button {
+
+        width: 86vw;
+
+        min-height: 52px;
+    }
 
     .scan-box {
 
-        width: 200px;
+        width: 65vw;
 
-        height: 200px;
-
-    }
-
-
-    .scan-title {
-
-        margin-bottom: 15px;
-
-    }
-
-
-    .scan-description {
-
-        margin-top: 15px;
-
+        max-width: 240px;
     }
 
 }
 
 
 /* ==================================================
-   SAFE AREA FOR MODERN PHONES
+   TALL PHONES
+   ================================================== */
+
+@media (min-height: 800px) and (max-width: 600px) {
+
+    .scan-title {
+
+        margin-bottom: 24px;
+    }
+
+    .scan-description {
+
+        margin-top: 24px;
+    }
+
+}
+
+
+/* ==================================================
+   LANDSCAPE
+   ================================================== */
+
+@media (orientation: landscape) {
+
+    #start-screen {
+
+        padding:
+            20px
+            30px;
+    }
+
+    #start-screen p {
+
+        margin-bottom: 18px;
+    }
+
+    #start-button {
+
+        min-height: 48px;
+    }
+
+    #scan-ui {
+
+        padding:
+            15px
+            20px;
+    }
+
+    .scan-box {
+
+        width: min(
+            45vh,
+            260px
+        );
+    }
+
+    .scan-title {
+
+        margin-bottom: 12px;
+    }
+
+    .scan-description {
+
+        margin-top: 12px;
+    }
+
+}
+
+
+/* ==================================================
+   VERY SHORT SCREEN
+   ================================================== */
+
+@media (max-height: 650px) {
+
+    #start-screen {
+
+        justify-content: center;
+    }
+
+    #start-screen h1 {
+
+        font-size: 28px;
+    }
+
+    #start-screen p {
+
+        margin:
+            10px
+            0
+            18px;
+    }
+
+    #start-button {
+
+        min-height: 48px;
+
+        padding:
+            12px
+            22px;
+    }
+
+    .scan-box {
+
+        width: 200px;
+    }
+
+    .scan-title {
+
+        margin-bottom: 12px;
+
+        font-size: 20px;
+    }
+
+    .scan-description {
+
+        margin-top: 12px;
+
+        font-size: 13px;
+    }
+
+}
+
+
+/* ==================================================
+   PREVENT TEXT SELECTION
+   ================================================== */
+
+#start-screen,
+#scan-ui {
+
+    user-select: none;
+
+    -webkit-user-select: none;
+}
+
+
+/* ==================================================
+   SAFE AREA SUPPORT
    ================================================== */
 
 @supports (
@@ -634,34 +689,31 @@ body {
     #start-screen {
 
         padding-top:
-            calc(
-                25px +
+            max(
+                24px,
                 env(safe-area-inset-top)
             );
 
         padding-bottom:
-            calc(
-                25px +
+            max(
+                24px,
                 env(safe-area-inset-bottom)
             );
-
     }
-
 
     #scan-ui {
 
         padding-top:
-            calc(
-                25px +
+            max(
+                20px,
                 env(safe-area-inset-top)
             );
 
         padding-bottom:
-            calc(
-                25px +
+            max(
+                20px,
                 env(safe-area-inset-bottom)
             );
-
     }
 
 }
