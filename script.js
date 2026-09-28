@@ -15,15 +15,18 @@ import {
 
 const mindarThree = new MindARThree({
 
+    // Dedicated AR container
     container:
         document.getElementById(
             'ar-container'
         ),
 
+    // MindAR image target
     imageTargetSrc:
         './targets/targets.mind',
 
     // Disable MindAR's built-in scanning UI
+    // We are using our own scanner UI
     uiScanning: 'no',
 
     // Tracking smoothing
@@ -48,12 +51,17 @@ const {
 // 3. RENDERER SETTINGS
 // ======================================================
 
+// Correct color output
 renderer.outputColorSpace =
     THREE.SRGBColorSpace;
 
+
+// Cinematic tone mapping
 renderer.toneMapping =
     THREE.ACESFilmicToneMapping;
 
+
+// Increase exposure
 renderer.toneMappingExposure =
     1.5;
 
@@ -62,17 +70,25 @@ renderer.toneMappingExposure =
 // 4. LIGHTING
 // ======================================================
 
+// ------------------------------------------------------
 // Main ambient light
+// ------------------------------------------------------
+
 const ambientLight =
     new THREE.AmbientLight(
         0xffffff,
         3
     );
 
-scene.add(ambientLight);
+scene.add(
+    ambientLight
+);
 
 
+// ------------------------------------------------------
 // Main directional light
+// ------------------------------------------------------
+
 const directionalLight =
     new THREE.DirectionalLight(
         0xffffff,
@@ -85,10 +101,15 @@ directionalLight.position.set(
     5
 );
 
-scene.add(directionalLight);
+scene.add(
+    directionalLight
+);
 
 
+// ------------------------------------------------------
 // Fill light
+// ------------------------------------------------------
+
 const fillLight =
     new THREE.DirectionalLight(
         0xffffff,
@@ -101,7 +122,9 @@ fillLight.position.set(
     -5
 );
 
-scene.add(fillLight);
+scene.add(
+    fillLight
+);
 
 
 // ======================================================
@@ -110,7 +133,9 @@ scene.add(fillLight);
 
 // Target index 0
 const anchor =
-    mindarThree.addAnchor(0);
+    mindarThree.addAnchor(
+        0
+    );
 
 
 // ======================================================
@@ -145,6 +170,7 @@ if (!startButton) {
 
 }
 
+
 if (!startScreen) {
 
     console.error(
@@ -152,6 +178,7 @@ if (!startScreen) {
     );
 
 }
+
 
 if (!scanUI) {
 
@@ -173,7 +200,7 @@ anchor.onTargetFound = () => {
     );
 
 
-    // Hide scanning instructions
+    // Hide our scanning UI
     if (scanUI) {
 
         scanUI.style.display =
@@ -195,7 +222,7 @@ anchor.onTargetLost = () => {
     );
 
 
-    // Show scanning instructions again
+    // Show our scanning UI again
     if (scanUI) {
 
         scanUI.style.display =
@@ -216,13 +243,16 @@ const loader =
 
 loader.load(
 
-    // GLB location
+    // --------------------------------------------------
+    // GLB FILE
+    // --------------------------------------------------
+
     './model.glb',
 
 
-    // ==================================================
+    // --------------------------------------------------
     // MODEL LOADED
-    // ==================================================
+    // --------------------------------------------------
 
     function (gltf) {
 
@@ -231,6 +261,7 @@ loader.load(
         );
 
 
+        // Get the actual model
         const model =
             gltf.scene;
 
@@ -278,8 +309,7 @@ loader.load(
 
 
         // ==============================================
-        // OPTIONAL:
-        // ENABLE SHADOWS FOR MODEL
+        // MODEL MESH SETTINGS
         // ==============================================
 
         model.traverse(
@@ -289,9 +319,11 @@ loader.load(
                     object.isMesh
                 ) {
 
+                    // Enable shadow casting
                     object.castShadow =
                         true;
 
+                    // Enable shadow receiving
                     object.receiveShadow =
                         true;
 
@@ -308,9 +340,9 @@ loader.load(
     },
 
 
-    // ==================================================
+    // --------------------------------------------------
     // MODEL LOADING PROGRESS
-    // ==================================================
+    // --------------------------------------------------
 
     function (progress) {
 
@@ -341,9 +373,9 @@ loader.load(
     },
 
 
-    // ==================================================
+    // --------------------------------------------------
     // MODEL LOADING ERROR
-    // ==================================================
+    // --------------------------------------------------
 
     function (error) {
 
@@ -351,6 +383,7 @@ loader.load(
             'ERROR loading model.glb:',
             error
         );
+
 
         alert(
             'Unable to load the 3D model. Please check that model.glb is in the correct folder.'
@@ -374,7 +407,10 @@ async function startAR() {
 
     try {
 
+        // ------------------------------------------------
         // Start MindAR
+        // ------------------------------------------------
+
         await mindarThree.start();
 
 
@@ -383,7 +419,10 @@ async function startAR() {
         );
 
 
-        // Start rendering
+        // ------------------------------------------------
+        // Start Three.js rendering
+        // ------------------------------------------------
+
         renderer.setAnimationLoop(
 
             () => {
@@ -430,17 +469,26 @@ if (startButton) {
             );
 
 
-            // Prevent multiple clicks
+            // ==========================================
+            // PREVENT MULTIPLE CLICKS
+            // ==========================================
+
             startButton.disabled =
                 true;
 
 
-            // Change button text
+            // ==========================================
+            // CHANGE BUTTON TEXT
+            // ==========================================
+
             startButton.textContent =
                 'STARTING AR...';
 
 
-            // Hide start screen
+            // ==========================================
+            // HIDE START SCREEN
+            // ==========================================
+
             if (startScreen) {
 
                 startScreen.style.display =
@@ -449,7 +497,10 @@ if (startButton) {
             }
 
 
-            // Show scanning UI
+            // ==========================================
+            // SHOW SCANNING UI
+            // ==========================================
+
             if (scanUI) {
 
                 scanUI.style.display =
@@ -458,9 +509,12 @@ if (startButton) {
             }
 
 
+            // ==========================================
+            // START AR
+            // ==========================================
+
             try {
 
-                // Start AR
                 await startAR();
 
 
@@ -469,7 +523,10 @@ if (startButton) {
                 );
 
 
-                // Change button text
+                // ======================================
+                // UPDATE BUTTON TEXT
+                // ======================================
+
                 startButton.textContent =
                     'AR STARTED';
 
@@ -482,7 +539,10 @@ if (startButton) {
                 );
 
 
-                // Re-enable button
+                // ======================================
+                // RE-ENABLE BUTTON
+                // ======================================
+
                 startButton.disabled =
                     false;
 
@@ -491,7 +551,10 @@ if (startButton) {
                     'START AR';
 
 
-                // Show start screen again
+                // ======================================
+                // SHOW START SCREEN AGAIN
+                // ======================================
+
                 if (startScreen) {
 
                     startScreen.style.display =
@@ -500,7 +563,10 @@ if (startButton) {
                 }
 
 
-                // Hide scanning UI
+                // ======================================
+                // HIDE SCANNER
+                // ======================================
+
                 if (scanUI) {
 
                     scanUI.style.display =
@@ -509,7 +575,10 @@ if (startButton) {
                 }
 
 
-                // User-friendly message
+                // ======================================
+                // USER MESSAGE
+                // ======================================
+
                 alert(
                     'Unable to start AR. Please check your camera permission and try again.'
                 );
@@ -519,5 +588,4 @@ if (startButton) {
         }
 
     );
-
 }
