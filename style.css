@@ -362,15 +362,15 @@ body {
 
     position: relative;
 
-    width:
-        min(
-            70vw,
-            280px
-        );
+    width: min(
+        70vw,
+        280px
+    );
 
     aspect-ratio: 1 / 1;
 
-    border: 1px solid
+    border:
+        1px solid
         rgba(
             255,
             255,
@@ -387,20 +387,19 @@ body {
    SCAN CORNERS
    ================================================== */
 
-.scan-box::before,
-.scan-box::after {
-
-    content: "";
+.scan-corner {
 
     position: absolute;
 
-    width: 42px;
+    width: 45px;
 
-    height: 42px;
+    height: 45px;
 
     border-color: white;
 
     border-style: solid;
+
+    z-index: 5;
 
     filter:
         drop-shadow(
@@ -409,9 +408,10 @@ body {
                 0,
                 0,
                 0,
-                0.75
+                0.8
             )
         );
+
 }
 
 
@@ -419,9 +419,10 @@ body {
    TOP LEFT
    ================================================== */
 
-.scan-box::before {
+.scan-corner.top-left {
 
     top: -1px;
+
     left: -1px;
 
     border-width:
@@ -431,10 +432,11 @@ body {
         4px;
 
     border-radius:
-        12px
+        14px
         0
         0
         0;
+
 }
 
 
@@ -442,9 +444,10 @@ body {
    TOP RIGHT
    ================================================== */
 
-.scan-box::after {
+.scan-corner.top-right {
 
     top: -1px;
+
     right: -1px;
 
     border-width:
@@ -455,12 +458,124 @@ body {
 
     border-radius:
         0
-        12px
+        14px
         0
         0;
+
 }
 
 
+/* ==================================================
+   BOTTOM LEFT
+   ================================================== */
+
+.scan-corner.bottom-left {
+
+    bottom: -1px;
+
+    left: -1px;
+
+    border-width:
+        0
+        0
+        4px
+        4px;
+
+    border-radius:
+        0
+        0
+        0
+        14px;
+
+}
+
+
+/* ==================================================
+   BOTTOM RIGHT
+   ================================================== */
+
+.scan-corner.bottom-right {
+
+    bottom: -1px;
+
+    right: -1px;
+
+    border-width:
+        0
+        4px
+        4px
+        0;
+
+    border-radius:
+        0
+        0
+        14px
+        0;
+
+}
+
+
+/* ==================================================
+   MOVING SCAN LINE
+   ================================================== */
+
+.scan-line {
+
+    position: absolute;
+
+    left: 8%;
+
+    width: 84%;
+
+    height: 3px;
+
+    top: 8%;
+
+    background: white;
+
+    border-radius: 999px;
+
+    z-index: 4;
+
+    opacity: 0.9;
+
+    box-shadow:
+        0 0 8px
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
+    animation:
+        scanMovement
+        2.2s
+        ease-in-out
+        infinite alternate;
+
+}
+
+
+/* ==================================================
+   SCAN LINE ANIMATION
+   ================================================== */
+
+@keyframes scanMovement {
+
+    0% {
+
+        top: 8%;
+
+    }
+
+    100% {
+
+        top: 92%;
+
+    }
+
+}
 /* ==================================================
    SCAN DESCRIPTION
    ================================================== */
