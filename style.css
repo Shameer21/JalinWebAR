@@ -139,7 +139,6 @@ body {
         );
 
     z-index: 1000;
-
 }
 
 
@@ -208,10 +207,11 @@ body {
 
 #start-button {
 
-    width: min(
-        82vw,
-        280px
-    );
+    width:
+        min(
+            82vw,
+            280px
+        );
 
     min-height: 54px;
 
@@ -254,19 +254,38 @@ body {
 
 
 /* ==================================================
-   BUTTON PRESS
+   START BUTTON HOVER
+   ================================================== */
+
+#start-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(
+            0,
+            0,
+            0,
+            0.45
+        );
+}
+
+
+/* ==================================================
+   START BUTTON PRESS
    ================================================== */
 
 #start-button:active {
 
     transform:
         scale(0.97);
-
 }
 
 
 /* ==================================================
-   BUTTON DISABLED
+   START BUTTON DISABLED
    ================================================== */
 
 #start-button:disabled {
@@ -320,7 +339,16 @@ body {
 
     z-index: 500;
 
+    /*
+       The scanner is only an overlay.
+       It must not block the camera.
+    */
+
     pointer-events: none;
+
+    user-select: none;
+
+    -webkit-user-select: none;
 }
 
 
@@ -362,10 +390,11 @@ body {
 
     position: relative;
 
-    width: min(
-        70vw,
-        280px
-    );
+    width:
+        min(
+            70vw,
+            280px
+        );
 
     aspect-ratio: 1 / 1;
 
@@ -380,6 +409,7 @@ body {
 
     border-radius: 20px;
 
+    overflow: hidden;
 }
 
 
@@ -436,7 +466,6 @@ body {
         0
         0
         0;
-
 }
 
 
@@ -461,7 +490,6 @@ body {
         14px
         0
         0;
-
 }
 
 
@@ -486,7 +514,6 @@ body {
         0
         0
         14px;
-
 }
 
 
@@ -511,7 +538,6 @@ body {
         0
         14px
         0;
-
 }
 
 
@@ -552,8 +578,8 @@ body {
         scanMovement
         2.2s
         ease-in-out
-        infinite alternate;
-
+        infinite
+        alternate;
 }
 
 
@@ -574,8 +600,9 @@ body {
         top: 92%;
 
     }
-
 }
+
+
 /* ==================================================
    SCAN DESCRIPTION
    ================================================== */
@@ -625,18 +652,22 @@ body {
     #start-screen {
 
         padding-left: 18px;
+
         padding-right: 18px;
     }
+
 
     #start-screen h1 {
 
         font-size: 30px;
     }
 
+
     #start-screen p {
 
         margin-bottom: 24px;
     }
+
 
     #start-button {
 
@@ -645,11 +676,20 @@ body {
         min-height: 52px;
     }
 
+
     .scan-box {
 
         width: 65vw;
 
         max-width: 240px;
+    }
+
+
+    .scan-corner {
+
+        width: 40px;
+
+        height: 40px;
     }
 
 }
@@ -659,12 +699,17 @@ body {
    TALL PHONES
    ================================================== */
 
-@media (min-height: 800px) and (max-width: 600px) {
+@media (
+    min-height: 800px
+) and (
+    max-width: 600px
+) {
 
     .scan-title {
 
         margin-bottom: 24px;
     }
+
 
     .scan-description {
 
@@ -687,15 +732,18 @@ body {
             30px;
     }
 
+
     #start-screen p {
 
         margin-bottom: 18px;
     }
 
+
     #start-button {
 
         min-height: 48px;
     }
+
 
     #scan-ui {
 
@@ -704,18 +752,22 @@ body {
             20px;
     }
 
+
     .scan-box {
 
-        width: min(
-            45vh,
-            260px
-        );
+        width:
+            min(
+                45vh,
+                260px
+            );
     }
+
 
     .scan-title {
 
         margin-bottom: 12px;
     }
+
 
     .scan-description {
 
@@ -736,10 +788,12 @@ body {
         justify-content: center;
     }
 
+
     #start-screen h1 {
 
         font-size: 28px;
     }
+
 
     #start-screen p {
 
@@ -748,6 +802,7 @@ body {
             0
             18px;
     }
+
 
     #start-button {
 
@@ -758,10 +813,12 @@ body {
             22px;
     }
 
+
     .scan-box {
 
         width: 200px;
     }
+
 
     .scan-title {
 
@@ -770,6 +827,7 @@ body {
         font-size: 20px;
     }
 
+
     .scan-description {
 
         margin-top: 12px;
@@ -777,19 +835,14 @@ body {
         font-size: 13px;
     }
 
-}
 
+    .scan-corner {
 
-/* ==================================================
-   PREVENT TEXT SELECTION
-   ================================================== */
+        width: 36px;
 
-#start-screen,
-#scan-ui {
+        height: 36px;
+    }
 
-    user-select: none;
-
-    -webkit-user-select: none;
 }
 
 
@@ -815,6 +868,7 @@ body {
                 env(safe-area-inset-bottom)
             );
     }
+
 
     #scan-ui {
 
